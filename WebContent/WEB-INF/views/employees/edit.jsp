@@ -16,9 +16,9 @@
                     <input type="hidden" name="_token" value="${_token}" />
                 </form>
                 <script>
-                function confirmDestroy(){
-                    if(confirm("本当に削除してよろしいですか？")){
-                        document.form[1].submit();
+                    function confirmDestroy(){
+                        if(confirm("本当に削除してよろしいですか？")){
+                            document.forms[1].submit();
                     }
                 }
                 </script>
