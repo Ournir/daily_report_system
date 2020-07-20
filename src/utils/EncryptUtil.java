@@ -21,5 +21,4 @@ public class EncryptUtil {
 
         return ret;
     }
-
 }
