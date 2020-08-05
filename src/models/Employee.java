@@ -1,15 +1,20 @@
 package models;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+
 
 @Table(name = "employees")
 @NamedQueries({
@@ -32,10 +37,12 @@ import javax.persistence.Table;
 })
 @Entity
 public class Employee {
+    @OneToMany
     @Id
-    @Column(name = "id")
+    @JoinColumn(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    private List<Follow> followList;
 
     @Column(name = "code",nullable = false, unique = true)
     private String code;
@@ -120,5 +127,13 @@ public class Employee {
 
     public void setDelete_flag(Integer delete_flag) {
         this.delete_flag = delete_flag;
+    }
+
+    public List<Follow> getFollowerList() {
+        return followList;
+    }
+
+    public void setFollowerList(List<Follow> followList) {
+        this.followList = followList;
     }
 }

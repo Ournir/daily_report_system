@@ -8,12 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
 
 @Table(name = "reports")
 @NamedQueries({
@@ -27,11 +26,11 @@ import javax.persistence.Table;
             ),
     @NamedQuery(
             name = "getMyAllReports",
-            query = "SELECT r FROM Report AS r WHERE r.employee = :employee ORDER BY r.id DESC"
+            query = "SELECT r FROM Report AS r ORDER BY r.id DESC"
             ),
     @NamedQuery(
             name = "getMyReportsCount",
-            query = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :employee"
+            query = "SELECT COUNT(r) FROM Report AS r"
             )
 })
 @Entity
@@ -41,8 +40,7 @@ public class Report {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
-    @JoinColumn(name = "employee_id",nullable = false)
+    @Column(name = "employee_id",nullable = false)
     private Employee employee;
 
     @Column(name = "report_date",nullable = false)

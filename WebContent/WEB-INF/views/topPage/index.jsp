@@ -30,6 +30,28 @@
             </tbody>
         </table>
 
+        <br /><br />
+        <h3>【フォローしている人の日報　一覧】</h3>
+        <table id="follow_list">
+            <tbody>
+                <tr>
+                    <th>社員番号</th>
+                    <th>氏名</th>
+                    <th>日付</th>
+                    <th>操作</th>
+                </tr>
+            </tbody>
+            <c:if test="${foloowed_id == employee.id}">
+            <c:forEach var ="report" items="${reports}" varStatus="status">
+                    <tr class="row${status.count % 2}">
+                        <td class="report_name"><c:out value="${report.employee.name}" /></td>
+                        <td class="report_date"><fmt:formatDate value='${report.report_date}' pattern='yyyy-MM-dd' /></td>
+                        <td class="report_title">${report.title}</td>
+                        <td class="report_action"><a href="<c:url value='/reports/show?id=${report.id}' />">詳細を見る</a></td>
+            </c:forEach>
+            </c:if>
+        </table>
+
         <div id="pagination">
             （全 ${reports_count} 件）<br />
             <c:forEach var="i" begin="1" end="${((reports_count - 1) / 15) + 1}" step="1">
