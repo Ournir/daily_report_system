@@ -37,12 +37,10 @@ import javax.persistence.Table;
 })
 @Entity
 public class Employee {
-    @OneToMany
     @Id
-    @JoinColumn(name = "id")
+    @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private List<Follow> followList;
 
     @Column(name = "code",nullable = false, unique = true)
     private String code;
@@ -64,6 +62,10 @@ public class Employee {
 
     @Column(name = "delete_flag", nullable = false)
     private Integer delete_flag;
+
+    @OneToMany
+    @JoinColumn(name = "id")
+    private List<Follow> followList;
 
     public Integer getId() {
         return id;

@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -29,11 +30,10 @@ public class Follow {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
-    @Column(name = "follower_id",nullable = false)
+    @JoinColumn(name = "follower_id",nullable = false)
     private Employee follower_id;
 
-    @Column(name = "followed_id",nullable = false)
+    @JoinColumn(name = "followed_id",nullable = false)
     private Employee followed_id;
 
     @Column(name = "created_at",nullable = false)
@@ -70,6 +70,5 @@ public class Follow {
     public void setCreated_at(Timestamp created_at) {
         this.created_at = created_at;
     }
-
 
 }

@@ -40,8 +40,6 @@ public class FollowServlet extends HttpServlet {
         Employee login_employee = (Employee)request.getAttribute("login_employee");
         Employee e = (Employee)request.getAttribute("employee");
 
-
-
         if(login_employee.getId() != null && e.getId() != null){
         Follow f = new Follow();
 
