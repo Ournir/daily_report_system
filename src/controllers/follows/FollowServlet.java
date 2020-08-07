@@ -36,9 +36,10 @@ public class FollowServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         EntityManager em = DBUtil.createEntityManager();
 
-
+        // フォローする（ログイン中の）ユーザーのEmployeeクラスを取得
         Employee login_employee = (Employee)request.getAttribute("login_employee");
-        Employee e = (Employee)request.getAttribute("report");
+        // フォローされる側のユーザーのEmployeeクラスを取得
+        Employee e = (Employee)request.getAttribute("employee");
 
         if(login_employee.getId() != null && e.getId() != null){
         Follow f = new Follow();
@@ -56,7 +57,7 @@ public class FollowServlet extends HttpServlet {
 
         request.getSession().setAttribute("flush", "フォローしました。");
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/employees/topPage.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/WEB-INF/views/topPage/index.jsp");
         rd.forward(request, response);
     }
     }

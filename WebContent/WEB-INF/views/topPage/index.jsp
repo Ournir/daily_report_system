@@ -41,7 +41,7 @@
                     <th>操作</th>
                 </tr>
             </tbody>
-            <c:if test="${foloowed_id == employee.id}">
+            <c:if test="${followed_id == employee.id}">
             <c:forEach var ="report" items="${reports}" varStatus="status">
                     <tr class="row${status.count % 2}">
                         <td class="report_name"><c:out value="${report.employee.name}" /></td>
