@@ -41,7 +41,7 @@ public class FollowServlet extends HttpServlet {
         // フォローされる側のユーザーのEmployeeクラスを取得
         Employee e = (Employee)request.getAttribute("employee");
 
-        if(login_employee.getId() != null && e.getId() != null){
+        if(login_employee.getId() != null && e.getId() != null){  // login.employee ,e どちらもnull
         Follow f = new Follow();
 
         f.setFollower_id(login_employee);
@@ -56,6 +56,8 @@ public class FollowServlet extends HttpServlet {
         em.close();
 
         request.getSession().setAttribute("flush", "フォローしました。");
+
+        request.setAttribute("follow",f);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/WEB-INF/views/topPage/index.jsp");
         rd.forward(request, response);
