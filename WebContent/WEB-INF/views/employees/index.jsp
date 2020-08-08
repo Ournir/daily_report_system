@@ -19,7 +19,7 @@
                 </tr>
                 <c:forEach var="employee" items="${employees}" varStatus="status">
                     <tr class="row${status.count % 2}">
-                        <td class="follow"><a href="<c:url value='/follow' />">フォロー</a></td>
+                        <td class="follow"><a href="<c:url value='/follow' />?uid=${employee.id} ">フォロー</a></td>
                         <td><c:out value="${employee.code}" /></td>
                         <td><c:out value="${employee.name}" /></td>
                         <td>

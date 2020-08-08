@@ -37,15 +37,18 @@ public class FollowServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         // フォローする（ログイン中の）ユーザーのEmployeeクラスを取得
-        Employee login_employee = (Employee)request.getAttribute("login_employee");
+        Employee login_employee = (Employee)request.getSession().getAttribute("login_employee");
         // フォローされる側のユーザーのEmployeeクラスを取得
-        Employee e = (Employee)request.getAttribute("employee");
+        // Employee e = (Employee)request.getAttribute("employee");
+        Integer uid = Integer.valueOf(request.getParameter("uid"));
 
-        if(login_employee.getId() != null && e.getId() != null){  // login.employee ,e どちらもnull
+        if(login_employee.getId() != null){
         Follow f = new Follow();
 
-        f.setFollower_id(login_employee);
-        f.setFollowed_id(e);
+        Employee followed = em.find(Employee.class, uid);
+
+        f.setFollower(login_employee);
+        f.setFollowed(followed);
 
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
         f.setCreated_at(currentTime);
@@ -59,7 +62,7 @@ public class FollowServlet extends HttpServlet {
 
         request.setAttribute("follow",f);
 
-        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/WEB-INF/views/topPage/index.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/topPage/index.jsp");
         rd.forward(request, response);
     }
     }

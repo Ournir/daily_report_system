@@ -33,11 +33,11 @@ public class Follow {
 
     @ManyToOne
     @JoinColumn(name = "follower_id",nullable = false)
-    private Employee follower_id;
+    private Employee follower;
 
     @ManyToOne
     @JoinColumn(name = "followed_id",nullable = false)
-    private Employee followed_id;
+    private Employee followed;
 
     @Column(name = "created_at",nullable = false)
     private Timestamp created_at;
@@ -50,20 +50,20 @@ public class Follow {
         this.id = id;
     }
 
-    public Employee getFollower_id() {
-        return follower_id;
+    public Employee getFollower() {
+        return follower;
     }
 
-    public void setFollower_id(Employee follower_id){
-        this.follower_id = follower_id;
+    public void setFollower(Employee follower){
+        this.follower = follower;
     }
 
-    public Employee getFollowed_id() {
-        return followed_id;
+    public Employee getFollowed() {
+        return followed;
     }
 
-    public void setFollowed_id(Employee followed_id) {
-        this.followed_id = followed_id;
+    public void setFollowed(Employee followed) {
+        this.followed = followed;
     }
 
     public Timestamp getCreated_at() {
@@ -73,5 +73,6 @@ public class Follow {
     public void setCreated_at(Timestamp created_at) {
         this.created_at = created_at;
     }
+
 
 }
