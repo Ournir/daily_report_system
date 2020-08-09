@@ -56,6 +56,7 @@ public class FollowServlet extends HttpServlet {
         f.setCreated_at(currentTime);
 
         List<Report> reports_followed = em.createNamedQuery("getMyAllFollowsReports", Report.class)
+                                   .setParameter("employee", login_employee)
                                    .getResultList();
 
         em.getTransaction().begin();
