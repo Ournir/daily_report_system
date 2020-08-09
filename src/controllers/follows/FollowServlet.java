@@ -2,6 +2,7 @@ package controllers.follows;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
@@ -13,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import models.Employee;
 import models.Follow;
+import models.Report;
 import utils.DBUtil;
 
 /**
@@ -53,6 +55,9 @@ public class FollowServlet extends HttpServlet {
         Timestamp currentTime = new Timestamp(System.currentTimeMillis());
         f.setCreated_at(currentTime);
 
+        List<Report> reports_followed = em.createNamedQuery("getMyAllFollowsReports", Report.class)
+                                   .getResultList();
+
         em.getTransaction().begin();
         em.persist(f);
         em.getTransaction().commit();
@@ -61,6 +66,8 @@ public class FollowServlet extends HttpServlet {
         request.getSession().setAttribute("flush", "フォローしました。");
 
         request.setAttribute("follow",f);
+
+        request.setAttribute("reports_followed", reports_followed);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/topPage/index.jsp");
         rd.forward(request, response);
