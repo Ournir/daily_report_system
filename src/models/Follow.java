@@ -16,10 +16,6 @@ import javax.persistence.Table;
 @Table(name = "follows")
 @NamedQueries({
     @NamedQuery(
-            name = "getAllFollowsReports",
-            query = "SELECT r FROM Report AS r INNER JOIN Follow AS f ON f.followed = r.employee WHERE f.follower = :employee"
-            ),
-    @NamedQuery(
             name = "getFollowsCount",
             query = "SELECT COUNT(f) FROM Follow AS f"
             )
