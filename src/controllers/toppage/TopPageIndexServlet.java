@@ -63,7 +63,9 @@ public class TopPageIndexServlet extends HttpServlet {
                 .setParameter("employee", login_employee.getId())
                 .getResultList();
 
-        request.setAttribute("reports_followed", reports_followed.get(0).getFollowed().getReportsList());
+        List<Report> lrp = reports_followed.get(0).getFollowed().getReportsList();
+
+        request.setAttribute("reports_followed", lrp);
         //]
 
         em.close();
