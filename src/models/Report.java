@@ -33,10 +33,6 @@ import javax.persistence.Table;
     @NamedQuery(
             name = "getMyReportsCount",
             query = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :employee"
-            ),
-    @NamedQuery(
-            name = "getAllFollowsReports",
-            query = "SELECT r FROM Report AS r INNER JOIN Follow AS f ON f.followed = r.employee WHERE f.follower = :employee"
             )
 })
 @Entity
@@ -121,4 +117,5 @@ public class Report {
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
     }
+
 }

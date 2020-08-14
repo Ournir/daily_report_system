@@ -42,27 +42,25 @@
                 </c:choose>
             </c:forEach>
         </div>
+        <p><a href="<c:url value='/employees/new' />">新規従業員の登録</a></p>
         <br /><br />
-        <h3>【フォローしている人の日報　一覧】</h3>
+        <h4>【フォローしている人の日報　一覧】</h4>
         <table id="follow_list">
             <tbody>
                 <tr>
-                    <th>社員番号</th>
                     <th>氏名</th>
                     <th>日付</th>
+                    <th>タイトル</th>
                     <th>操作</th>
                 </tr>
             </tbody>
-            <c:if test="${follow.followed == employee.id}">
-            <c:forEach var ="report" items="${reports_followed}" varStatus="status">
+            <c:forEach var ="report_follow" items="${reports_followed}" varStatus="status">
                     <tr class="row${status.count % 2}">
-                        <td class="report_name"><c:out value="${report.employee.name}" /></td>
-                        <td class="report_date"><fmt:formatDate value='${report.report_date}' pattern='yyyy-MM-dd' /></td>
-                        <td class="report_title">${report.title}</td>
-                        <td class="report_action"><a href="<c:url value='/reports/show?id=${report.id}' />">詳細を見る</a></td>
+                        <td class="report_name"><c:out value="${report_follow.employee.name}" /></td>
+                        <td class="report_date"><fmt:formatDate value='${report_follow.report_date}' pattern='yyyy-MM-dd' /></td>
+                        <td class="report_title">${report_follow.title}</td>
+                        <td class="report_action"><a href="<c:url value='/reports/show?id=${report_follow.id}' />">詳細を見る</a></td>
             </c:forEach>
-            </c:if>
         </table>
-        <p><a href="<c:url value='/reports/new' />">新規日報の登録</a></p>
     </c:param>
 </c:import>

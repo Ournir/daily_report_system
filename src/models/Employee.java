@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +14,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 
 
 
@@ -63,9 +65,12 @@ public class Employee {
     @Column(name = "delete_flag", nullable = false)
     private Integer delete_flag;
 
-    @OneToMany
-    @JoinColumn(name = "id")
+   @OneToMany
+   @JoinColumn(name = "id")
     private List<Follow> followList;
+
+    @OneToMany(mappedBy = "employee",fetch = FetchType.EAGER)
+    private List<Report> reportsList;
 
     public Integer getId() {
         return id;
@@ -137,5 +142,13 @@ public class Employee {
 
     public void setFollowerList(List<Follow> followList) {
         this.followList = followList;
+    }
+
+    public List<Report> getReportsList() {
+        return reportsList;
+    }
+
+    public void setReportsList(List<Report> reportsList) {
+        this.reportsList = reportsList;
     }
 }

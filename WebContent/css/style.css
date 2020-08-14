@@ -173,3 +173,21 @@ h3{
     padding:3px;
     backgroung-color:skyblue;
 }
+
+table#follow_list th{
+    font-weight: bold;
+    padding: 10px 2%;
+}
+
+table#follow_list .report_name{
+    width:20%;
+    padding:10px 2%;
+}
+
+table#follow_list .report_title{
+    width:37%;
+}
+
+table#follow_list .report_action{
+    width:13%;
+}
