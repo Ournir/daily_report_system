@@ -60,6 +60,7 @@
                         <td class="report_date"><fmt:formatDate value='${report_follow.report_date}' pattern='yyyy-MM-dd' /></td>
                         <td class="report_title">${report_follow.title}</td>
                         <td class="report_action"><a href="<c:url value='/reports/show?id=${report_follow.id}' />">詳細を見る</a></td>
+                    </tr>
             </c:forEach>
         </table>
     </c:param>

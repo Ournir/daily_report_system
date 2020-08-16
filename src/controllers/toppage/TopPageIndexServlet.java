@@ -1,6 +1,7 @@
 package controllers.toppage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -57,16 +58,18 @@ public class TopPageIndexServlet extends HttpServlet {
                 .setParameter("employee", login_employee)
                 .getSingleResult();
 
-
-        //if(f.getFollower() == login_employee){
         List<Follow> reports_followed = em.createNamedQuery("getAllFollowsReports", Follow.class)
                 .setParameter("employee", login_employee.getId())
                 .getResultList();
 
-        List<Report> lrp = reports_followed.get(0).getFollowed().getReportsList();
-
-        request.setAttribute("reports_followed", lrp);
-        //]
+        List<Report> reportsList = new ArrayList<Report>();
+        for (Follow follow : reports_followed) {
+            List<Report> followedReportList = follow.getFollowed().getReportsList();
+            for (Report report : followedReportList) {
+                reportsList.add(report);
+            }
+        }
+        request.setAttribute("reports_followed", reportsList);
 
         em.close();
 
