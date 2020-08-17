@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -99,7 +98,6 @@ public class FollowRemoveSerVlet extends HttpServlet {
                 }
             }
         }
-        RequestDispatcher rd = request.getRequestDispatcher("WEB-INF/views/employees/index.jsp");
-        rd.forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/employees/index");
     }
 }

@@ -19,7 +19,7 @@
                     <th>操作</th>
                 </tr>
                 <c:forEach var="employee" items="${employees}" varStatus="status">
-                    <sql:setDataSource dataSource = "com.mysql.jdbc.Driver"
+                    <sql:setDataSource
                         var = "db" url = "jdbc:mysql://localhost/daily_report_system?useSSL=false&useUnicode=true&characterEncoding=utf8"
                         user = "repuser" password = "reppass" />
                         <sql:query sql= "SELECT * FROM follows WHERE follower_id = ? AND followed_id = ?" var= "rs" dataSource= "${db}" >
@@ -32,7 +32,7 @@
                             <td class="follow"><a href="<c:url value='/follow' />?uid=${employee.id} ">フォロー</a></td>
                         </c:when>
                         <c:otherwise>
-                            <td class="follow"><a href="<c:url value='/followremove' />uid=${employee.id} ">フォロー解除</a></td>
+                            <td class="follow"><a href="<c:url value='/followremove' />?uid=${employee.id} ">フォロー解除</a></td>
                         </c:otherwise>
                     </c:choose>
                         <td><c:out value="${employee.code}" /></td>
