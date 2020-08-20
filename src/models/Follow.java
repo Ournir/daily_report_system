@@ -22,7 +22,11 @@ import javax.persistence.Table;
     @NamedQuery(
             name = "getAllFollowsReports",
             query = "SELECT f FROM Follow AS f WHERE f.follower.id = :employee"
-      )
+            )
+//    @NamedQuery(
+//            name = "removeFollowData",
+//            query = "DELETE f FROM Follow AS f WHERE f.follower.id = :employee AND f.followed.id = :uid"
+//            )
 })
 @Entity
 public class Follow {

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql"%>
 <c:import url="../layout/app.jsp">
     <c:param name="content">
         <c:if test="${flush != null}">
@@ -19,16 +18,9 @@
                     <th>操作</th>
                 </tr>
                 <c:forEach var="employee" items="${employees}" varStatus="status">
-                    <sql:setDataSource
-                        var = "db" url = "jdbc:mysql://localhost/daily_report_system?useSSL=false&useUnicode=true&characterEncoding=utf8"
-                        user = "repuser" password = "reppass" />
-                        <sql:query sql= "SELECT * FROM follows WHERE follower_id = ? AND followed_id = ?" var= "rs" dataSource= "${db}" >
-                            <sql:param value="${loginId}" />
-                            <sql:param value="${employee.id}"/>
-                    </sql:query>
                     <tr class="row${status.count % 2}">
                     <c:choose>
-                        <c:when test="${rs == null}">
+                        <c:when test="${employee.isFollowed == true}">
                             <td class="follow"><a href="<c:url value='/follow' />?uid=${employee.id} ">フォロー</a></td>
                         </c:when>
                         <c:otherwise>

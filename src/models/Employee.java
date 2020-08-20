@@ -72,6 +72,9 @@ public class Employee {
     @OneToMany(mappedBy = "employee",fetch = FetchType.EAGER)
     private List<Report> reportsList;
 
+    @Column(name = "isFollowed")
+    private boolean isFollowed;
+
     public Integer getId() {
         return id;
     }
@@ -136,11 +139,11 @@ public class Employee {
         this.delete_flag = delete_flag;
     }
 
-    public List<Follow> getFollowerList() {
+    public List<Follow> getFollowList() {
         return followList;
     }
 
-    public void setFollowerList(List<Follow> followList) {
+    public void setFollowList(List<Follow> followList) {
         this.followList = followList;
     }
 
@@ -150,5 +153,13 @@ public class Employee {
 
     public void setReportsList(List<Report> reportsList) {
         this.reportsList = reportsList;
+    }
+
+    public boolean isFollowed() {
+        return isFollowed;
+    }
+
+    public void setIsFollowed(boolean isFollowed) {
+        this.isFollowed = isFollowed;
     }
 }
