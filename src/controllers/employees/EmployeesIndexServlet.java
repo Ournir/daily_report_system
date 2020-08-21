@@ -54,22 +54,23 @@ public class EmployeesIndexServlet extends HttpServlet {
                 .setParameter("employee", login_employee.getId())
                 .getResultList();
 
-        for (Employee employee : employees) {
-            employee.getId();
-            employee.setIsFollowed(false);
-            for (Follow follow : follows) {
-                if (follow.getFollowed().getId() == employee.getId()){
-                    employee.setIsFollowed(true);
-                    employees.add(employee);
-                }else{
-                    employees.add(employee);
-                }
-            }
-        }
+//        for (Employee employee : employees) {
+//            employee.getId();
+//            employee.setIsFollowed(false);
+//            for (Follow follow : follows) {
+//                if (follow.getFollowed().getId() == employee.getId()){
+//                    employee.setIsFollowed(true);
+//                    employees.add(employee);
+//                }else{
+//                    employees.add(employee);
+//                }
+//            }
+//        }
 
         em.close();
 
         request.setAttribute("employees", employees);
+        request.setAttribute("follows", follows);
         request.setAttribute("employees_count", employees_count);
         request.setAttribute("page", page);
 

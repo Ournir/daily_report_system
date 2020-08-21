@@ -72,8 +72,8 @@ public class Employee {
     @OneToMany(mappedBy = "employee",fetch = FetchType.EAGER)
     private List<Report> reportsList;
 
-    @Column(name = "isFollowed")
-    private boolean isFollowed;
+//    @Column(name = "isFollowed")
+//    private boolean isFollowed;
 
     public Integer getId() {
         return id;
@@ -155,11 +155,11 @@ public class Employee {
         this.reportsList = reportsList;
     }
 
-    public boolean isFollowed() {
-        return isFollowed;
-    }
-
-    public void setIsFollowed(boolean isFollowed) {
-        this.isFollowed = isFollowed;
-    }
+//    public boolean isFollowed() {
+//        return isFollowed;
+//    }
+//
+//    public void setIsFollowed(boolean isFollowed) {
+//        this.isFollowed = isFollowed;
+//    }
 }

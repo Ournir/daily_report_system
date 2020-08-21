@@ -19,13 +19,21 @@
                 </tr>
                 <c:forEach var="employee" items="${employees}" varStatus="status">
                     <tr class="row${status.count % 2}">
+
+                    <c:set var="isFollowed" value="${false}"></c:set>
+                    <c:forEach var="follow" items="${follows}" varStatus="status">
+                        <c:out value="${follow.followed.id}"></c:out>
+                        <c:if test="${follow.followed.id == employee.id}">
+                          <c:set var="isFollowed" value="${true}"></c:set>
+                        </c:if>
+                    </c:forEach>
                     <c:choose>
-                        <c:when test="${employee.isFollowed == true}">
-                            <td class="follow"><a href="<c:url value='/follow' />?uid=${employee.id} ">フォロー</a></td>
+                        <c:when test="${isFollowed}">
+                            <td class="follow"><a href="<c:url value='/followremove' />?uid=${employee.id} ">フォロー解除</a></td>
                         </c:when>
                         <c:otherwise>
-                            <td class="follow"><a href="<c:url value='/followremove' />?uid=${employee.id} ">フォロー解除</a></td>
-                        </c:otherwise>
+                            <td class="follow"><a href="<c:url value='/follow' />?uid=${employee.id} ">フォロー</a></td>
+                         </c:otherwise>
                     </c:choose>
                         <td><c:out value="${employee.code}" /></td>
                         <td><c:out value="${employee.name}" /></td>

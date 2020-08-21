@@ -1,6 +1,8 @@
 package controllers.follows;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Employee;
+import models.Follow;
 import utils.DBUtil;
 
 /**
@@ -36,14 +39,23 @@ public class FollowRemoveSerVlet extends HttpServlet {
 
         EntityManager em = DBUtil.createEntityManager();
 
-        int deleted = em.createQuery("DELETE FROM Follow f"
-                                    +"WHERE f.follower.id = ?1"
-                                    +"AND f.followed.id = ?2")
-                    .setParameter(1, login_employee.getId())
-                    .setParameter(2, uid)
-                    .executeUpdate();
+        List<Follow> follows = em.createNamedQuery("getAllFollowsReports", Follow.class)
+                .setParameter("employee",login_employee.getId())
+                .getResultList();
 
+        Iterator<Follow> iterator = follows.iterator();
+        while (iterator.hasNext()) {
+            Follow follow = iterator.next();
+            if (follow.getFollowed().getId() == uid) {
+                iterator.remove();
+            }
+        }
+
+        em.getTransaction().begin();
+        em.getTransaction().commit();
         em.close();
+
+        request.getSession().setAttribute("flush", "フォロー解除しました。");
 
         response.sendRedirect(request.getContextPath() + "/index.html");
     }
